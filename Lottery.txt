@@ -1,0 +1,40 @@
+Lottery Contract:
+
+- Users can become participants by sending Ether.
+- Ether will be stored in a Prize Pool.
+- Third party source (manager) will trigger the contract to pick a winner.
+- Contract will transfer all the Ether to the winner.
+- Lottery contract resets after transferring to the winner.
+
+Lottery Design:
+
+Variables:
+1. Manager : address of person who created the contract
+2. Players: array of addresses of people who have entered
+
+Functions:
+1. enter: enter a player to the lottery
+2. pickWinner: randomly picks a winner and sends them the prize pool
+
+To generate a random index to pick a winner, the below inputs are fed to the SHA algorithm (sha3 and keccak256 are same):
+1. Current block difficulty
+2. Current time
+3. Address of the players
+
+calling random() % players.length = random number between 0 and players.length
+
+Writing tests for the contract: Ask yourself what behaviour is expected out of the contract
+
+Frontend built on react application
+
+- npx create-react-app lottery-react
+- npm install web3
+
+*Whenever we visit a web page with metamask installed, we instantly get access to a copy of web3 that points to a network.*
+*Metamask always injects web3 into the active page*
+
+We want to hijack metamask's version of web3 by pushing our instance of web3
+
+To deploy the contract: node deploy.js
+
+Create a file in src/lottery.js => to setup local copy of contract
